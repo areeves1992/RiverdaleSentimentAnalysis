@@ -1,5 +1,17 @@
-if (!require("pacman")) install.packages("pacman")
+# This script downloads the Riverdale scripts from springfieldspringfield.co.uk/ as a txt for analysis.
+
+# If the pacman package is not installed on the machine, install it and load it
+if (!require("pacman")){
+  
+  install.packages("pacman")
+  
+  library(pacman)
+} # End if
+
+# Use the pacman package to load the needed packages. Do not update them.
 pacman::p_load(dplyr, plyr, rvest,babynames, tidytext,tidyr,ggplot2, install = TRUE, update = FALSE)
+
+
 
 #functions from here http://www.mjdenny.com/Text_Processing_In_R.html
 Clean_String <- function(string){
