@@ -13,7 +13,7 @@ Clean_String <- function(string){
   # Split it
   temp <- stringr::str_split(temp, " ")[[1]]
   # Get rid of trailing "" if necessary
-  indexes <- which(temp == "")
+  indexes <- which(temp == "") 
   if(length(indexes) > 0){
     temp <- temp[-indexes]
   } 
