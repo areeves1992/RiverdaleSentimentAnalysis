@@ -11,26 +11,38 @@ if (!require("pacman")){
 # Use the pacman package to load the needed packages. Do not update them.
 pacman::p_load(dplyr, plyr, rvest,babynames, tidytext,tidyr,ggplot2, install = TRUE, update = FALSE)
 
+##### FUNCTIONS #####
 
-
+#' Clean strings by removing white space and puncuation
+# ' 
+#' @param string the string to be cleaned
+#' @return a lowercase string vector with each word sep. into in each index
+#' @example Clean_String("In God we  trust.   All OthERS MUst bRing DATA." )
 #functions from here http://www.mjdenny.com/Text_Processing_In_R.html
 Clean_String <- function(string){
-  # Lowercase
+  
+  # Make the string lowercase
   temp <- tolower(string)
-  # Remove everything that is not a number or letter (may want to keep more 
-  # stuff in your actual analyses). 
-  #temp <- stringr::str_replace_all(temp,"[^a-zA-Z\\s]", "")
-  # Shrink down to just one white space
+  
+  # Ensure there is only one space of white space between each word.
   temp <- stringr::str_replace_all(temp,"[\\s]+", " ")
-  # Split it
+  
+  # Split the vector so each word is at its own index. 
+  #For example "in god we trust" "in" is at index 1, "god" is at index 2. 
   temp <- stringr::str_split(temp, " ")[[1]]
-  # Get rid of trailing "" if necessary
+  
+  # Find if there are extra white spaces in any of the indexes of the vector.
   indexes <- which(temp == "") 
+  
+  #If there is white space, remove those indexes of the array
   if(length(indexes) > 0){
     temp <- temp[-indexes]
-  } 
+  } #End if
+  
+  # Return a vector of strings
   return(temp)
-}
+  
+} #End of Clean_String function
 
 Clean_Text_Block <- function(text){
   # Get rid of blank lines
